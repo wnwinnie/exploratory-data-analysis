@@ -1,4 +1,6 @@
 # exploratory-data-analysis
-coursera
-week1 project
-The R code includes scripts for all 4 plots 
+
+week1 project:
+The "week1 project R code" includes scripts for all 4 plots.
+The scripts generate each plot are also seperately attached. 
+

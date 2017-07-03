@@ -2,23 +2,17 @@ getwd()
 setwd("/home/ni/Coursera")
 library(dplyr)
 library(ggplot2)
-list.files()
+
 electricity <- read.table("household_power_consumption.txt", header=TRUE,sep=";")
 head(electricity)
 dim(electricity)
-#electricity$Date <- as.Date(electricity$Date)
-electricity$Time <- strptime(electricity$Time)
-head(electricity)
-electricity %>% select(Date)
-electricity_2 <- electricity
-#electricity_2$Date <- as.Date(electricity_2$Date)
-head(electricity_2)
 
-electricity_data <- electricity_2 %>% dplyr::filter(Date=="2/2/2007"|Date=="1/2/2007")
+#only keep data for required days
+electricity_data <- electricity %>% dplyr::filter(Date=="2/2/2007"|Date=="1/2/2007")
 dim(electricity_data)
 head(electricity_data)
 
-
+#######plot1
 png("plot1.png",width=480, height=480)
 hist(as.numeric(as.character(electricity_data$Global_active_power)),col="red",main="Global Active Power",xlab="Global Active Power (kilowatts)")
 dev.off()
@@ -26,7 +20,7 @@ dev.off()
 #########plot2
 
 electricity_data$datetime <- paste(electricity_data$Date,",",electricity_data$Time) 
-#change the format of 
+#change the format of datetime and creat a new variable 
 electricity_data$datetime_new <- strptime(electricity_data$datetime,format="%d/%m/%Y , %H:%M",tz = "")
 head(electricity_data)
 
@@ -39,7 +33,7 @@ dev.off()
 
 ##### plot3 
 head(electricity_data)
-
+#change variables from factor to numeric 
 electricity_data$Sub_metering_1 <- electricity_data$Sub_metering_1 %>% as.character() %>% as.numeric()
 electricity_data$Sub_metering_2 <- electricity_data$Sub_metering_2 %>% as.character() %>% as.numeric()
 electricity_data$Sub_metering_3 <- electricity_data$Sub_metering_3 %>% as.character() %>% as.numeric()

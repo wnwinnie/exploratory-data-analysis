@@ -1,0 +1,13 @@
+setwd("/home/ni/Coursera")
+library(dplyr)
+library(ggplot2)
+
+
+#read the data into R 
+electricity <- read.table("household_power_consumption.txt", header=TRUE,sep=";")
+
+#only select data for 2 days 
+electricity_data <- electricity %>% dplyr::filter(Date=="2/2/2007"|Date=="1/2/2007")
+
+dim(electricity_data)
+head(electricity_data)
